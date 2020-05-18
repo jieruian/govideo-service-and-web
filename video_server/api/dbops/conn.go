@@ -13,7 +13,7 @@ var (
 )
 
 func init() {
-	dsn := "root:@tcp(localhost:3306)/video_server?charset=utf8"
+	dsn := "root:040833@tcp(localhost:3306)/video_server?charset=utf8"
 	db, err = sql.Open("mysql", dsn)
 	if err != nil {
 		log.Fatal("打开数据库失败", err)
