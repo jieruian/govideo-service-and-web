@@ -1,7 +1,10 @@
 package dbops
 
 import (
+	"fmt"
+	"strconv"
 	"testing"
+	"time"
 )
 
 var tempvid string
@@ -61,13 +64,14 @@ func testRegetUser(t *testing.T) {
 
 //</editor-fold>
 
+//<editor-fold desc="测试video_info表">
 func TestVideoWorkFlow(t *testing.T) {
 	clearTables()
 	t.Run("PrepareUser", TestAddUserCredential)
 	t.Run("AddVideo", TestAddNewVideo)
-	//t.Run("GetVideo", TestGetVideoInfo)
-	//t.Run("DelVideo", TestDeleteVideoInfo)
-	//t.Run("RegetVideo", testRegetVideoInfo)
+	t.Run("GetVideo", TestGetVideoInfo)
+	t.Run("DelVideo", TestDeleteVideoInfo)
+	t.Run("RegetVideo", testRegetVideoInfo)
 }
 
 func TestAddNewVideo(t *testing.T) {
@@ -97,5 +101,34 @@ func testRegetVideoInfo(t *testing.T) {
 	vi, err := GetVideoInfo(tempvid)
 	if err != nil || vi != nil {
 		t.Errorf("Error of RegetVideoInfo: %v", err)
+	}
+}
+
+//</editor-fold>
+
+func testComments(t *testing.T) {
+	clearTables()
+}
+
+func TestAddNewComments(t *testing.T) {
+	vid := "12345"
+	aid := 1
+	content := "I like this video"
+	err := addNewComments(vid, aid, content)
+	if err != nil {
+		t.Errorf("测试增加评论失败%v", err)
+	}
+}
+
+func TestListComments(t *testing.T) {
+	vid := "12345"
+	from := 1560960000
+	to, _ := strconv.Atoi(strconv.FormatInt(time.Now().UnixNano()/1000000000, 10))
+	res, err := ListComments(vid, from, to)
+	if err != nil {
+		t.Errorf("测试获取评论list失败%v", err)
+	}
+	for i, ele := range res {
+		fmt.Printf("comment: %d, %v \n", i, ele)
 	}
 }
