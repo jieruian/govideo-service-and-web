@@ -139,6 +139,7 @@ func TestListComments(t *testing.T) {
 
 //</editor-fold>
 
+//<editor-fold desc="测试session的表">
 func testSessions(t *testing.T) {
 	clearTables()
 	t.Run("InsertSession", TestInsertSession)
@@ -181,3 +182,5 @@ func TestDeleteSession(t *testing.T) {
 		t.Errorf("测试删除session失败%v", err)
 	}
 }
+
+//</editor-fold>
