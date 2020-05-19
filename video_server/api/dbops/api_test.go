@@ -106,8 +106,12 @@ func testRegetVideoInfo(t *testing.T) {
 
 //</editor-fold>
 
+//<editor-fold desc="测试comments表">
 func testComments(t *testing.T) {
 	clearTables()
+	t.Run("AddUser", TestAddUserCredential)
+	t.Run("AddComments", TestAddNewComments)
+	t.Run("ListComments", TestListComments)
 }
 
 func TestAddNewComments(t *testing.T) {
@@ -130,5 +134,50 @@ func TestListComments(t *testing.T) {
 	}
 	for i, ele := range res {
 		fmt.Printf("comment: %d, %v \n", i, ele)
+	}
+}
+
+//</editor-fold>
+
+func testSessions(t *testing.T) {
+	clearTables()
+	t.Run("InsertSession", TestInsertSession)
+	t.Run("RetrieveSession", TestRetrieveSession)
+	t.Run("RetrieveAllSession", TestRetrieveAllSession)
+	t.Run("DeleteSession", TestDeleteSession)
+}
+
+func TestInsertSession(t *testing.T) {
+	err := InsertSession("123456", 12345, "jieruian")
+	if err != nil {
+		t.Errorf("测试写入session失败%v", err)
+	}
+}
+
+func TestRetrieveSession(t *testing.T) {
+	res, err := RetrieveSession("123456")
+	if err != nil {
+		t.Errorf("测试获取session失败%v", err)
+	}
+
+	fmt.Printf("测试获取session的结果: %v \n", res)
+
+}
+
+func TestRetrieveAllSession(t *testing.T) {
+	m, err := RetrieveAllSession()
+	if err != nil {
+		t.Errorf("测试获取所有的session失败%v", err)
+	}
+	m.Range(func(k, v interface{}) bool {
+		fmt.Println("iterate:", k, v)
+		return true
+	})
+}
+
+func TestDeleteSession(t *testing.T) {
+	err := DeleteSession("123456")
+	if err != nil {
+		t.Errorf("测试删除session失败%v", err)
 	}
 }
