@@ -17,7 +17,17 @@ func NewMiddleWareHandler(r *httprouter.Router) http.Handler {
 }
 
 func (m middleWareHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	validateUserSession(r)
+	statue := validateUserSession(r)
+	r.Header.Set("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
+	r.Header.Set("Access-Control-Allow-Origin", "*")
+
+	fmt.Println(r.Header.Get("Content-Type"))
+	if statue {
+		fmt.Println("不需要重新登录")
+	} else {
+		fmt.Println("需要重登陆")
+	}
+
 	m.r.ServeHTTP(w, r)
 }
 

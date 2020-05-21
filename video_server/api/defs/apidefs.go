@@ -1,9 +1,22 @@
 package defs
 
+//<editor-fold desc="request">
 type UserCredential struct {
 	Username string `json:"user_name"`
 	Pwd      string `json:"pwd"`
 }
+
+//</editor-fold>
+
+//<editor-fold desc="response">
+type SignedUp struct {
+	Success   bool   `json:"success"`
+	SessionId string `json:"session_id"`
+}
+
+//</editor-fold>
+
+//<editor-fold desc="数据模型">
 type VideoInfo struct {
 	Id           string `json:"id"`
 	AuthorId     int    `json:"author_id"`
@@ -22,3 +35,5 @@ type SimpleSession struct {
 	Username string // login name
 	TTL      int64
 }
+
+//</editor-fold>
