@@ -15,6 +15,7 @@ func NewConnLimiter(cc int) *ConnLimiter {
 }
 
 func (cl *ConnLimiter) GetConn() bool {
+	log.Printf("长度%d,总长度%d", len(cl.bucket), cl.courrentConn)
 	if len(cl.bucket) >= cl.courrentConn {
 		log.Panicln("Reached the rate limitaion")
 		return false
