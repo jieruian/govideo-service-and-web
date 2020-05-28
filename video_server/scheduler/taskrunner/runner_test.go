@@ -2,6 +2,7 @@ package taskrunner
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"testing"
 	"time"
@@ -13,7 +14,7 @@ func TestRuner(t *testing.T) {
 			dc <- i
 			log.Printf("Dispatcher sent: %v", i)
 		}
-
+		fmt.Println("走不走啊")
 		return nil
 	}
 
@@ -31,7 +32,7 @@ func TestRuner(t *testing.T) {
 		return errors.New("Executor")
 	}
 
-	runner := NewRunner(30, false, d, e)
+	runner := NewRunner(60, false, d, e)
 	go runner.StartAll()
 	time.Sleep(3 * time.Second)
 }
