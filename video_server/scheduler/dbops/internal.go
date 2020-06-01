@@ -3,7 +3,7 @@ package dbops
 import "log"
 
 func ReadVideoDeletionRecord(count int) ([]string, error) {
-	stmtOut, err := db.Prepare("select viode_id from video_del_rec limit ?")
+	stmtOut, err := db.Prepare("select video_id from video_del_rec limit ?")
 	var ids []string
 	if err != nil {
 		return ids, err

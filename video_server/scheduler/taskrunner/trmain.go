@@ -23,7 +23,7 @@ func (w *Work) startWorker() {
 	}
 }
 
-func start() {
+func Start() {
 	r := NewRunner(3, true, VideoClearDispatcher, VideoClearExecuor)
 	w := NewWork(3, r)
 	go w.startWorker()
