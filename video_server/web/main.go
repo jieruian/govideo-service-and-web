@@ -11,6 +11,7 @@ func registHandler() *httprouter.Router {
 	router.POST("/", homeHandler)
 	router.GET("/userhome", userhomeHandler)
 	router.POST("/userhome", userhomeHandler)
+	router.POST("/api", apiHandler)
 
 	router.ServeFiles("/statics/*filepath", http.Dir("./templates"))
 	return router
